@@ -15,11 +15,22 @@ creatures = {
 }
 
 
+# Define the header of the table
+header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
+
+# Create a list to store each row of data
+rows = []
+
+# Iterate through the dictionary and append each row to the list
+for creature, stats in creatures.items():
+    row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+    rows.append(row)
+
+# Join the header and rows together with a newline character '\n'
+table = '\n'.join([header] + rows)
+
+# Print and display the table
+print(table)
+easygui.msgbox(table)
 
 
-for name, stats in creatures.items():
-    print(f"{name}")
-    for catagory, level in stats.items():
-        print(f"{catagory}\t\t{level}")
-
-    print()
