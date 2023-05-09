@@ -17,13 +17,16 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-searched_monster = easygui.enterbox("Type in Creatures that you want to seach: ")
-
-Search_title = f"Searched Monster: {searched_monster}"
-search_msg = f"{creatures[searched_monster]}"
-search_string = ""
+searched_monster = easygui.enterbox("Type in creature that you want to search: ")
 if searched_monster in creatures:
-    for search_creature, status in creatures.items():
-        search_string += f"\n{search_creature} : {status}"
-        for stats_field, values in search_string.items():
-            easygui.msgbox(title=Search_title, msg=search_string)
+    search_title = f"Searched Monster: {searched_monster}"
+    search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
+                  f"Speed: {creatures[searched_monster]['Speed']}\n"
+                  f"Stealth: {creatures[searched_monster]['Stealth']}\n"
+                  f"Cunning: {creatures[searched_monster]['Cunning']}")
+    easygui.msgbox(title=search_title, msg=search_msg)
+else:
+    easygui.msgbox("Creature not found.")
+
+
+
