@@ -18,12 +18,12 @@ creatures = {
 }
 
 # Allow user to type in the search box
-searched_card = easygui.enterbox("Enter the name of the creature you want to edit: ")
+searched_monster = easygui.enterbox("Enter the name of the creature you want to edit: ")
 
 # Check if the entered creature name exists in the dictionary
-if searched_card in creatures:
+if searched_monster in creatures:
     # If the creature exists, allow the user to edit its stats
-    creature_stats = creatures[searched_card]
+    creature_stats = creatures[searched_monster]
     updated_stats = {}
     for stat in creature_stats:
         new_value = easygui.enterbox(f"Enter new value for {stat} (current value: {creature_stats[stat]}): ")
@@ -31,14 +31,13 @@ if searched_card in creatures:
             updated_stats[stat] = int(new_value)
         else:
             updated_stats[stat] = creature_stats[stat]
-    creatures[searched_card] = updated_stats
+    creatures[searched_monster] = updated_stats
+    # Display the updated stats of the creature
     new_msg = ""
-    title = f"{searched_card}\n"
-    for search_name, new_stats in updated_stats.items():
-        new_msg += f"\n{search_name} : {new_stats}"
+    title = f"{searched_monster}\n"
+    for stat_name, stat_value in updated_stats.items():
+        new_msg += f"\n{stat_name} : {stat_value}"
     easygui.msgbox(title=title, msg=new_msg)
 else:
     # If the creature does not exist, display an error message
-    easygui.msgbox(f"{searched_card} not found in the dictionary.")
-
-#  easygui.msgbox(f"{searched_card} has been updated: {creatures[searched_card]}")
+    easygui.msgbox(f"{searched_monster} not found in the dictionary.")
