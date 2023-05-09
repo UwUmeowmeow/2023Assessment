@@ -1,3 +1,5 @@
+"""Allow user to add in new monster card into the program, by entering the name and each values of the individual cards"""
+
 # Import the easygui module for displaying a message box
 import easygui
 
