@@ -1,5 +1,3 @@
-"""Allow user to add in new monster card into the program, by entering the name and each values of the individual cards"""
-
 # Import the easygui module for displaying a message box
 import easygui
 
@@ -21,31 +19,53 @@ creatures = {
 while True:
 
     # Define a list of fields for the message box
-    enterbox_fields = ["Card name", "Strength", "Speed", "Stealth", "Cunnning"]
-    enterbox_msg = "Enter your card infomation"
+    enterbox_fields = ["Card name", "Strength", "Speed", "Stealth", "Cunning"]
+    enterbox_msg = "Enter your card information"
     enterbox_title = "Add Monster cards"
 
-    # Display a message box and recieve the user's input
-    monster_info = easygui.multenterbox(title= enterbox_title, msg=enterbox_msg, fields= enterbox_fields)
-    monster_info = easygui.multenterbox(title= enterbox_title,
-                                        msg= "Confirm the card info",
-                                        fields= enterbox_fields, 
+    # Display a message box and receive the user's input
+    monster_info = easygui.multenterbox(title=enterbox_title, msg=enterbox_msg, fields=enterbox_fields)
+    monster_info = easygui.multenterbox(title=enterbox_title,
+                                        msg="Confirm the card info",
+                                        fields=enterbox_fields,
                                         values=monster_info)
 
     # Check if the user has cancelled
-    bad = False
+    check = False
     for item in monster_info:
         if item == "":
-            bad = True
-    if bad is True:
+            check = True
+    if check is True:
         continue
     elif monster_info is None:
         easygui.msgbox("Cancelled")
         break
     else:
         # If the user has entered valid input, add the new monster card to the dictionary
-        creatures[monster_info[0]] = {"Strength" : monster_info[1], "Speed" : monster_info[2],
-                                    "Stealth" : monster_info[3], "Cunning" : monster_info[4]}
+        creatures[monster_info[0]] = {"Strength": monster_info[1], "Speed": monster_info[2],
+                                      "Stealth": monster_info[3], "Cunning": monster_info[4]}
         break
-        
+
+# Print the updated dictionary
+title_add = "Updated dictionary:"
+header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
+
+# Create a list to store each row of data
+rows = []
+
+# Iterate through the dictionary and append each row to the list
+for creature, stats in creatures.items():
+    # Format each row with the creature name and its stats
+    row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+    rows.append(row)
+
+# Join the header and rows together with a newline character '\n'
+table = '\n'.join([header] + rows)
+
+# Print the table to the console
+print(table)
+
+# Display the table in a message box using easygui
+easygui.msgbox(title=title_add, msg=table)
+
 
