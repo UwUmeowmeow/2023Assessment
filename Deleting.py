@@ -17,10 +17,27 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
+Deleted_monster = easygui.enterbox("Type in the name of the creature you want to remove: ")
 
-for name, stats in creatures.items():
-    choices_name = name
-            
+del creatures[Deleted_monster]
 
+# Define the header of the table
+header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
 
-easygui.multchoicebox(choices=choices_name)
+# Create a list to store each row of data
+rows = []
+
+# Iterate through the dictionary and append each row to the list
+for creature, stats in creatures.items():
+    # Format each row with the creature name and its stats
+    row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+    rows.append(row)
+
+# Join the header and rows together with a newline character '\n'
+table = '\n'.join([header] + rows)
+
+# Print the table to the console
+print(table)
+
+# Display the table in a message box using easygui
+easygui.msgbox(table)

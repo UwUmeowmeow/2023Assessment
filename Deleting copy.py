@@ -17,10 +17,14 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-
-for name, stats in creatures.items():
-    choices_name = name
             
+choices = []
+for name, stats in creatures.items():
+    choices.append(name)
 
 
-easygui.multchoicebox(choices=choices_name)
+easygui.multchoicebox(choices=choices)
+
+
+del creatures[choices]
+print(creatures)
