@@ -17,14 +17,27 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-            
-choices = []
-for name, stats in creatures.items():
-    choices.append(name)
+while True:
 
 
-easygui.multchoicebox(choices=choices)
+    choices = []
+    for name, stats in creatures.items():
+        choices.append(name)
 
 
-del creatures[choices]
-print(creatures)
+    hi = easygui.multchoicebox(choices=choices)
+
+    for item in hi:
+        del creatures[item]
+        print(creatures)
+
+    check = False
+    for item in hi:
+        if item == "":
+            check = True
+    if check is True:
+        continue
+    elif hi is None:
+        easygui.msgbox("Please select at least card to delete")
+        
+        
