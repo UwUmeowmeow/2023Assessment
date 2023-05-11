@@ -3,7 +3,6 @@
 # Import the easygui module for displaying a message box
 import easygui
 
-# Define a dictionary of creatures and their stats
 creatures = {
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
@@ -19,25 +18,16 @@ creatures = {
 
 while True:
 
-
     choices = []
     for name, stats in creatures.items():
         choices.append(name)
+    selected = easygui.multchoicebox(choices=choices)
 
+    if not selected:  # Check if the user cancelled the dialog
+        easygui.msgbox("Please select at least one card to delete")
+    else:
+        for item in selected:
+            del creatures[item]
 
-    hi = easygui.multchoicebox(choices=choices)
-
-    for item in hi:
-        del creatures[item]
         print(creatures)
-
-    check = False
-    for item in hi:
-        if item == "":
-            check = True
-    if check is True:
-        continue
-    elif hi is None:
-        easygui.msgbox("Please select at least card to delete")
-        
-        
+        break
