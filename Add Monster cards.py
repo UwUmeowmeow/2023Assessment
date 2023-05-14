@@ -1,3 +1,7 @@
+"""Allow user to add in new cards in to the program, by displaying the enterbox
+ and let the user enter each values for each of the status fields"""
+
+
 # Import the easygui module for displaying a message box
 import easygui
 
