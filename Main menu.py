@@ -5,6 +5,6 @@ Add monster cards, delete monster cards, Configure monster card, Display monster
 import easygui
 
 title_output = "Hello"
-MSG = "Choose one of the following bottons"
+MSG = "Choose one of the following buttons"
 buttons = ["Display", "Add", "Delete", "Configure", "Search"]
 easygui.buttonbox(msg=MSG, title=title_output, choices=buttons)
