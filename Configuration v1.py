@@ -30,10 +30,4 @@ for stat in creature_stats:
     else:
         updated_stats[stat] = creature_stats[stat]
 creatures[searched_monster] = updated_stats
-# Display the updated stats of the creature
-new_msg = ""
-title = f"{searched_monster}\n"
-for stat_name, stat_value in updated_stats.items():
-    new_msg += f"\n{stat_name} : {stat_value}"
-easygui.msgbox(title=title, msg=new_msg)
 
