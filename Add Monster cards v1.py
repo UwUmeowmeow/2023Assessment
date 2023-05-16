@@ -39,7 +39,7 @@ while True:
     creatures[monster_info[0]] = {"Strength": monster_info[1], "Speed": monster_info[2],
                                     "Stealth": monster_info[3], "Cunning": monster_info[4]}
 
-
+    #print cretures with the new added card
     print(creatures)
 
 
