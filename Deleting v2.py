@@ -25,7 +25,6 @@ while True:
 
     # Display a dialog box for the user to select monster cards to delete
     selected = easygui.multchoicebox(choices=choices)
-    print(selected)
 
     if selected is None: # If the user pressed cancel it should exit the loop 
         easygui.msgbox("Canceled")
@@ -41,6 +40,24 @@ while True:
             del creatures[item]
 
         # Print the updated dictionary after deleting the cards
-        print(creatures)
+        header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
+
+        # Create a list to store each row of data
+        rows = []
+
+        # Iterate through the dictionary and append each row to the list
+        for creature, stats in creatures.items():
+            # Format each row with the creature name and its stats
+            row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+            rows.append(row)
+
+        # Join the header and rows together with a newline character '\n'
+        table = '\n'.join([header] + rows)
+
+        # Print the table to the console
+        print(table)
+
+        # Display the table in a message box using easygui
+        easygui.msgbox(table)
         break  # Exit the loop
 

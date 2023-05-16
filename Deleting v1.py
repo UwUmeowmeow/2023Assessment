@@ -17,7 +17,7 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-Deleted_monster = easygui.enterbox("Type in the name of the creature you want to remove: ")
+Deleted_monster = easygui.enterbox(title="Delete creature", msg="Type in the name of the creature you want to remove: ")
 
 del creatures[Deleted_monster]
 
