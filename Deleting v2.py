@@ -3,6 +3,7 @@
 # Import the easygui module for displaying a message box
 import easygui
 
+# Dictionary of monster cards with their stats
 creatures = {
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
@@ -17,17 +18,29 @@ creatures = {
 }
 
 while True:
-
+    # Create a list of available monster card names
     choices = []
     for name, stats in creatures.items():
         choices.append(name)
-    selected = easygui.multchoicebox(choices=choices)
 
-    if not selected:  # Check if the user cancelled the dialog
-        easygui.msgbox("Please select at least one card to delete")
+    # Display a dialog box for the user to select monster cards to delete
+    selected = easygui.multchoicebox(choices=choices)
+    print(selected)
+
+    if selected is None: # If the user pressed cancel it should exit the loop 
+        easygui.msgbox("Canceled")
+        break
+
+    # If the user didn't select print the message and run the loop again
+    elif selected == []:
+        easygui.msgbox("Please select at least one option")
+
     else:
+        # Delete the selected monster cards from the dictionary
         for item in selected:
             del creatures[item]
 
+        # Print the updated dictionary after deleting the cards
         print(creatures)
-        break
+        break  # Exit the loop
+

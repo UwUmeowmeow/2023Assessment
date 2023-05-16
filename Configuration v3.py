@@ -1,6 +1,8 @@
 """Allow user to type in Monster name in the search box; allow user to type in 
 new values for each fields and display it with easy,gui """
 
+
+# Import the easygui module for displaying a message box
 import easygui
 
 # Define a dictionary of creatures and their stats
