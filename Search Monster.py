@@ -17,16 +17,19 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
+# Prompt the user to enter a creature name to search for
 searched_monster = easygui.enterbox("Type in creature that you want to search: ")
+
+# Check if the entered creature name exists in the dictionary
 if searched_monster in creatures:
+    # Prepare the title and message to display the creature's stats
     search_title = f"Searched Monster: {searched_monster}"
     search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
                   f"Speed: {creatures[searched_monster]['Speed']}\n"
                   f"Stealth: {creatures[searched_monster]['Stealth']}\n"
                   f"Cunning: {creatures[searched_monster]['Cunning']}")
+    # Display a message box with the creature's stats
     easygui.msgbox(title=search_title, msg=search_msg)
 else:
+    # Display an error message if the creature is not found
     easygui.msgbox("Creature not found.")
-
-
-
