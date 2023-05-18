@@ -26,7 +26,9 @@ enterbox_title = "Add Monster cards"
 # Display a message box and receive the user's input
 monster_info = easygui.multenterbox(title=enterbox_title, msg=enterbox_msg, fields=enterbox_fields)
 
-
+if monster_info is None:
+    easygui.msgbox("Cancelled")
+    exit()
 
 # Start a loop to allow the user to add new monster cards
 while True:
@@ -45,17 +47,16 @@ while True:
         break
     # Check if the user has cancelled
 
-    for kwof in monster_info(1:):
+    for enterbox_info in monster_info[1:]:
         try:
-            number_cool = int(kwof)
+            creasture_values = int(enterbox_info)
         except ValueError:
-            print("")
+            easygui.msgbox("Please enter a valid number for the status fields")
+            break
         else:
-            if kwof > 25 or kwof < 1:
-                continue
-
-
-
+            if creasture_values > 25 or creasture_values < 1:
+                easygui.msgbox("Please enter number between 1 to 25")
+                break
 
     else:
         for item in monster_info:
@@ -65,8 +66,8 @@ while True:
             continue
         else:
             # If the user has entered valid input, add the new monster card to the dictionary
-            creatures[monster_info[0]] = {"Strength": monster_info[1], "Speed": monster_info[2],
-                                        "Stealth": monster_info[3], "Cunning": monster_info[4]}
+            creatures[monster_info[0]] = {"Strength": int(monster_info[1]), "Speed": int(monster_info[2]),
+                                        "Stealth": int(monster_info[3]), "Cunning": int(monster_info[4])}
             break
     
 
@@ -78,9 +79,9 @@ header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
 rows = []
 
 # Iterate through the dictionary and append each row to the list
-for creature, stats in creatures.items():
+for creature_display, stats_display in creatures.items():
     # Format each row with the creature name and its stats
-    row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+    row = f"{creature_display}\t\t{stats_display['Strength']}\t\t{stats_display['Speed']}\t\t{stats_display['Stealth']}\t\t{stats_display['Cunning']}"
     rows.append(row)
 
 # Join the header and rows together with a newline character '\n'
