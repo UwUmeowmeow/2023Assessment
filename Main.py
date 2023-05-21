@@ -16,8 +16,9 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-def f_Display_creature():
-        # Define the header of the table
+
+def f_display_creature():
+    # Define the header of the table
     header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
 
     # Create a list to store each row of data
@@ -38,7 +39,9 @@ def f_Display_creature():
     # Display the table in a message box using easygui
     easygui.msgbox(table)
 
-def f_Add_creature():
+
+def f_add_creature():
+    #list each datailes for the enterbox
     enterbox_fields = ["Card name", "Strength", "Speed", "Stealth", "Cunning"]
     enterbox_msg = "Enter your card information"
     enterbox_title = "Add Monster cards"
@@ -47,9 +50,8 @@ def f_Add_creature():
     monster_info = easygui.multenterbox(title=enterbox_title, msg=enterbox_msg, fields=enterbox_fields)
 
     if monster_info is None:
-        easygui.msgbox("Cancelled")
-        exit()
-
+        
+        return False
     # Start a loop to allow the user to add new monster cards
     while True:
 
@@ -63,8 +65,7 @@ def f_Add_creature():
         check = False
 
         if monster_info is None:
-            easygui.msgbox("Cancelled")
-            break
+            return False
         # Check if the user has cancelled
 
         for enterbox_info in monster_info[1:]:
@@ -90,8 +91,9 @@ def f_Add_creature():
                                             "Stealth": int(monster_info[3]), "Cunning": int(monster_info[4])}
                 break
 
-def f_Configure_creature():
-        # Allow user to type in the search box
+
+def f_configure_creature():
+    # Allow user to type in the search box
     searched_monster = easygui.enterbox("Enter the name of the creature you want to edit: ")
 
     # Check if the entered creature name exists in the dictionary
@@ -116,8 +118,82 @@ def f_Configure_creature():
         # If the creature does not exist, display an error message
         easygui.msgbox(f"{searched_monster} not found in the dictionary.")
 
-def f_search_creature():
+
+def f_search_creature(searched_monster):
+    # Prompt the user to enter a creature name to search for
     
 
+    # Check if the entered creature name exists in the dictionary
+    if searched_monster in creatures:
+        # Prepare the title and message to display the creature's stats
+        search_title = f"Searched Monster: {searched_monster}"
+        search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
+                    f"Speed: {creatures[searched_monster]['Speed']}\n"
+                    f"Stealth: {creatures[searched_monster]['Stealth']}\n"
+                    f"Cunning: {creatures[searched_monster]['Cunning']}")
+        # Display a message box with the creature's stats
+        easygui.msgbox(title=search_title, msg=search_msg)
+    else:
+        # Display an error message if the creature is not found
+        easygui.msgbox("Creature not found.")
 
+
+def f_delete_creature():
+    # Loop
+    while True:
+        # Create a list of available monster card names
+        choices = []
+        for name, stats in creatures.items():
+            choices.append(name)
+
+        # Display a dialog box for the user to select monster cards to delete
+        selected = easygui.multchoicebox(choices=choices)
+
+        if selected is None: # If the user pressed cancel it should exit the loop 
+            easygui.msgbox("Canceled")
+            break
+
+        # If the user didn't select print the message and run the loop again
+        elif selected == []:
+            easygui.msgbox("Please select at least one option")
+
+        else:
+            # Delete the selected monster cards from the dictionary
+            for item in selected:
+                del creatures[item]
+            
+            f_display_creature()
+            break
+
+        
 # Main routine
+# Looping
+while True:
+    # Title for the message box
+    title_output = "Hello"
+
+    # Message to display in the message box
+    MSG = "Choose one of the following buttons"
+
+    # List of buttons for the user to select
+    buttons = ["Display", "Add","Configure", "Delete", "Search", "Exit"]
+
+    # Display the message box with the button choices and store the selected button
+    select_button = easygui.buttonbox(msg=MSG, title=title_output, choices=buttons)
+
+    # If the user selects "Exit", display a message and break out of the loop
+    if select_button == "Display":
+        f_display_creature()
+    elif select_button == "Add":
+        output = f_add_creature()
+        if output is False:
+            easygui.msgbox("Cancelled")
+    elif select_button == "Configure":
+        f_configure_creature()
+    elif select_button == "Delete":
+        f_delete_creature()
+    elif select_button == "Search":
+        f_search_creature(searched_monster = easygui.enterbox("Type in creature that you want to search: "))
+    else:
+        easygui.msgbox("You Exit the program")
+        exit()
