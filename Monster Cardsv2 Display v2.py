@@ -27,7 +27,7 @@ rows = []
 # Iterate through the dictionary and append each row to the list
 for creature, stats in creatures.items():
     # Format each row with the creature name and its stats
-    row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+    row = f"{creature}\t\t{stats['Strength']}\t\t\t{stats['Speed']}\t\t\t{stats['Stealth']}\t\t\t{stats['Cunning']}"
     rows.append(row)
 
 # Join the header and rows together with a newline character '\n'

@@ -31,9 +31,9 @@ def f_display_creature():
     # Iterate through the dictionary and append each row to the list
     for creature, stats in creatures.items():
         # Format each row with the creature name and its stats
-        row = f"{creature}\t\t{stats['Strength']}\t\t" \
-              f"{stats['Speed']}\t\t" \
-              f"{stats['Stealth']}\t\t" \
+        row = f"{creature}\t\t{stats['Strength']}\t\t\t" \
+              f"{stats['Speed']}\t\t\t" \
+              f"{stats['Stealth']}\t\t\t" \
               f"{stats['Cunning']}"
         rows.append(row)
 
