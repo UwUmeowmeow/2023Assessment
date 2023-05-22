@@ -1,4 +1,6 @@
-"""Display a enterbox and allow user to type in Monster name, and display the monster name and status"""
+"""The assembled version of the code,
+all the component being put together into one program;
+execute it without any error"""
 
 # Import the easygui module for displaying a message box
 import easygui
@@ -27,7 +29,10 @@ def f_display_creature():
     # Iterate through the dictionary and append each row to the list
     for creature, stats in creatures.items():
         # Format each row with the creature name and its stats
-        row = f"{creature}\t\t{stats['Strength']}\t\t{stats['Speed']}\t\t{stats['Stealth']}\t\t{stats['Cunning']}"
+        row = f"{creature}\t\t{stats['Strength']}\t\t" \
+              f"{stats['Speed']}\t\t" \
+              f"{stats['Stealth']}\t\t" \
+              f"{stats['Cunning']}"
         rows.append(row)
 
     # Join the header and rows together with a newline character '\n'
@@ -41,13 +46,15 @@ def f_display_creature():
 
 
 def f_add_creature():
-    #list each datailes for the enterbox
+    # list each datailes for the enterbox
     enterbox_fields = ["Card name", "Strength", "Speed", "Stealth", "Cunning"]
     enterbox_msg = "Enter your card information"
     enterbox_title = "Add Monster cards"
 
     # Display a message box and receive the user's input
-    monster_info = easygui.multenterbox(title=enterbox_title, msg=enterbox_msg, fields=enterbox_fields)
+    monster_info = easygui.multenterbox(title=enterbox_title,
+                                        msg=enterbox_msg,
+                                        fields=enterbox_fields)
 
     if monster_info is None:
         
@@ -57,10 +64,9 @@ def f_add_creature():
 
         # Define a list of fields for the message box
         monster_info = easygui.multenterbox(title=enterbox_title,
-                                        msg="Confirm the card info",
-                                        fields=enterbox_fields,
-                                        values=monster_info)
-
+                                            msg="Confirm the card info",
+                                            fields=enterbox_fields,
+                                            values=monster_info)
 
         check = False
 
@@ -72,7 +78,8 @@ def f_add_creature():
             try:
                 creasture_values = int(enterbox_info)
             except ValueError:
-                easygui.msgbox("Please enter a valid number for the status fields")
+                easygui.msgbox("Please enter a valid number"
+                               " for the status fields")
                 break
             else:
                 if creasture_values > 25 or creasture_values < 1:
@@ -81,20 +88,24 @@ def f_add_creature():
 
         else:
             for item in monster_info:
-                    if item == "":
-                        check = True
+                if item == "":
+                    check = True
             if check is True:
                 continue
             else:
-                # If the user has entered valid input, add the new monster card to the dictionary
-                creatures[monster_info[0]] = {"Strength": int(monster_info[1]), "Speed": int(monster_info[2]),
-                                            "Stealth": int(monster_info[3]), "Cunning": int(monster_info[4])}
+                # If the user has entered valid input,
+                # add the new monster card to the dictionary
+                creatures[monster_info[0]] = {"Strength": int(monster_info[1]),
+                                              "Speed": int(monster_info[2]),
+                                              "Stealth": int(monster_info[3]),
+                                              "Cunning": int(monster_info[4])}
                 break
 
 
 def f_configure_creature():
     # Allow user to type in the search box
-    searched_monster = easygui.enterbox("Enter the name of the creature you want to edit: ")
+    searched_monster = easygui.enterbox("Enter the name"
+                                        " of the creature you want to edit: ")
 
     # Check if the entered creature name exists in the dictionary
     if searched_monster in creatures:
@@ -102,7 +113,9 @@ def f_configure_creature():
         creature_stats = creatures[searched_monster]
         updated_stats = {}
         for stat in creature_stats:
-            new_value = easygui.enterbox(f"Enter new value for {stat} (current value: {creature_stats[stat]}): ")
+            new_value = easygui.enterbox(f"Enter new value for {stat}"
+                                         f" (current value: "
+                                         f"{creature_stats[stat]}): ")
             if new_value is not None:
                 updated_stats[stat] = int(new_value)
             else:
@@ -120,17 +133,15 @@ def f_configure_creature():
 
 
 def f_search_creature(searched_monster):
-    # Prompt the user to enter a creature name to search for
-    
 
     # Check if the entered creature name exists in the dictionary
     if searched_monster in creatures:
         # Prepare the title and message to display the creature's stats
         search_title = f"Searched Monster: {searched_monster}"
         search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
-                    f"Speed: {creatures[searched_monster]['Speed']}\n"
-                    f"Stealth: {creatures[searched_monster]['Stealth']}\n"
-                    f"Cunning: {creatures[searched_monster]['Cunning']}")
+                      f"Speed: {creatures[searched_monster]['Speed']}\n"
+                      f"Stealth: {creatures[searched_monster]['Stealth']}\n"
+                      f"Cunning: {creatures[searched_monster]['Cunning']}")
         # Display a message box with the creature's stats
         easygui.msgbox(title=search_title, msg=search_msg)
     else:
@@ -149,12 +160,13 @@ def f_delete_creature():
         # Display a dialog box for the user to select monster cards to delete
         selected = easygui.multchoicebox(choices=choices)
 
-        if selected is None: # If the user pressed cancel it should exit the loop 
+        # If the user pressed cancel it should exit the loop
+        if selected is None:
             easygui.msgbox("Canceled")
             break
 
         # If the user didn't select print the message and run the loop again
-        elif selected == []:
+        elif not selected:
             easygui.msgbox("Please select at least one option")
 
         else:
@@ -165,8 +177,9 @@ def f_delete_creature():
             f_display_creature()
             break
 
-        
+
 # Main routine
+
 # Looping
 while True:
     # Title for the message box
@@ -176,11 +189,14 @@ while True:
     MSG = "Choose one of the following buttons"
 
     # List of buttons for the user to select
-    buttons = ["Display", "Add","Configure", "Delete", "Search", "Exit"]
+    buttons = ["Display", "Add", "Configure", "Delete", "Search", "Exit"]
 
-    # Display the message box with the button choices and store the selected button
-    select_button = easygui.buttonbox(msg=MSG, title=title_output, choices=buttons)
+    # Display the message box with the button choices,
+    # and store the selected button
+    select_button = easygui.buttonbox(
+        msg=MSG, title=title_output, choices=buttons)
 
+    # Detect what user selected and run the function of the component.
     # If the user selects "Exit", display a message and break out of the loop
     if select_button == "Display":
         f_display_creature()
@@ -193,7 +209,10 @@ while True:
     elif select_button == "Delete":
         f_delete_creature()
     elif select_button == "Search":
-        f_search_creature(searched_monster = easygui.enterbox("Type in creature that you want to search: "))
+        # Prompt the user to enter a creature name to search for
+        f_search_creature(
+            searched_monster=easygui.enterbox(
+                "Type in creature that you want to search: "))
     else:
         easygui.msgbox("You Exit the program")
         exit()
