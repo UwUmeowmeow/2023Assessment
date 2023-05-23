@@ -123,14 +123,31 @@ def f_configure_creature():
         creature_stats = creatures[searched_monster]
         updated_stats = {}
         for stat in creature_stats:
-            new_value = easygui.enterbox(f"Enter new value for {stat} "
-                                         f"(current value: '"
-                                         f"'{creature_stats[stat]}): ")
-            if new_value is not None:
-                updated_stats[stat] = int(new_value)
-            else:
-                updated_stats[stat] = creature_stats[stat]
-        creatures[searched_monster] = updated_stats
+            while True:
+                new_value = easygui.enterbox(f"Enter new value for {stat} "
+                                             f"(current value: '"
+                                             f"'{creature_stats[stat]}): ")
+                try:
+
+                    if new_value is not None and new_value != "":
+                        int_new = int(new_value)
+                    else:
+                        return
+                except ValueError:
+                    # Display an error message if an invalid number is entered
+                    easygui.msgbox("Please enter a valid number"
+                                   " for the status fields")
+                else:
+                    if int_new > 25 or int_new < 1:
+                        # Display an error message
+                        # if the number is not within the valid range
+                        easygui.msgbox("Please enter a"
+                                       " number between 1 and 25")
+
+                    else:
+                        updated_stats[stat] = creature_stats[stat]
+                        creatures[searched_monster] = updated_stats
+                        break
 
         # Display the updated stats of the creature
         new_msg = ""
@@ -173,6 +190,7 @@ def f_delete_creature():
         # Display a dialog box for the user to select monster cards to delete
         selected = easygui.multchoicebox(choices=choices)
 
+
         # If the user pressed cancel, exit the loop
         if selected is None:
             easygui.msgbox("Canceled")
@@ -190,12 +208,18 @@ def f_delete_creature():
 
             # Call in the display creature function and
             # display the whole dictionary
-            f_display_creature()
-            break
+            if creatures != {}:
+                f_display_creature()
+
+                return
+            else:
+                easygui.msgbox("There is no creature left")
+                break
+
+
 
 
 # Main routine
-
 # Looping
 while True:
     # Title for the message box
