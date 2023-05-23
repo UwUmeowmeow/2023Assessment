@@ -180,6 +180,9 @@ def f_search_creature(searched_monster):
 # Function to delete individual creature or
 # multiples creatures from the dictionary
 def f_delete_creature():
+    if creatures == {}:
+        easygui.msgbox("No Creature Left")
+        return
     # Loop
     while True:
         # Create a list of available monster card names
@@ -189,7 +192,6 @@ def f_delete_creature():
 
         # Display a dialog box for the user to select monster cards to delete
         selected = easygui.multchoicebox(choices=choices)
-
 
         # If the user pressed cancel, exit the loop
         if selected is None:
@@ -215,8 +217,6 @@ def f_delete_creature():
             else:
                 easygui.msgbox("There is no creature left")
                 break
-
-
 
 
 # Main routine
