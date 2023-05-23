@@ -235,7 +235,7 @@ while True:
     MSG = "Choose one of the following buttons"
 
     # List of buttons for the user to select
-    buttons = ["Display", "Add", "Configure", "Delete", "Search", "Exit"]
+    buttons = ["Display", "Add", "Configure", "Search", "Delete", "Exit"]
 
     # Display the message box with the button choices,
     # and store the selected button
