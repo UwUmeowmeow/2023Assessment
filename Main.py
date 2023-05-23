@@ -97,7 +97,7 @@ def f_add_creature():
                 if creature_value > 25 or creature_value < 1:
                     # Display an error message
                     # if the number is not within the valid range
-                    easygui.msgbox("Please enter a number between 1 and 25")
+                    easygui.msgbox("Please enter a number between 1 to 25")
                     break
         else:
             for item in monster_info:
