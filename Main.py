@@ -90,7 +90,7 @@ def f_add_creature():
                 creature_value = int(enterbox_info)
             except ValueError:
                 # Display an error message if an invalid number is entered
-                easygui.msgbox("Please enter a valid number"
+                easygui.msgbox("Please enter a valid integer"
                                " for the status fields")
                 break
             else:
