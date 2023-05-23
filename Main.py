@@ -22,29 +22,35 @@ creatures = {
 
 # Function to display the creature stats
 def f_display_creature():
-    # Define the header of the table
-    header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
 
-    # Create a list to store each row of data
-    rows = []
+    if creatures == {}:
+        easygui.msgbox("No Creature Left")
+        return
 
-    # Iterate through the dictionary and append each row to the list
-    for creature, stats in creatures.items():
-        # Format each row with the creature name and its stats
-        row = f"{creature}\t\t{stats['Strength']}\t\t\t" \
-              f"{stats['Speed']}\t\t\t" \
-              f"{stats['Stealth']}\t\t\t" \
-              f"{stats['Cunning']}"
-        rows.append(row)
+    else:
+        # Define the header of the table
+        header = "Monster:\t\tStrength:\tSpeed:\t\tStealth:\tCunning:"
 
-    # Join the header and rows together with a newline character '\n'
-    table = '\n'.join([header] + rows)
+        # Create a list to store each row of data
+        rows = []
 
-    # Print the table to the console
-    print(table)
+        # Iterate through the dictionary and append each row to the list
+        for creature, stats in creatures.items():
+            # Format each row with the creature name and its stats
+            row = f"{creature}\t\t{stats['Strength']}\t\t\t" \
+                  f"{stats['Speed']}\t\t\t" \
+                  f"{stats['Stealth']}\t\t\t" \
+                  f"{stats['Cunning']}"
+            rows.append(row)
 
-    # Display the table in a message box using easygui
-    easygui.msgbox(table)
+        # Join the header and rows together with a newline character '\n'
+        table = '\n'.join([header] + rows)
+
+        # Print the table to the console
+        print(table)
+
+        # Display the table in a message box using easygui
+        easygui.msgbox(table)
 
 
 # Function to add in new creatures with their stats and name
