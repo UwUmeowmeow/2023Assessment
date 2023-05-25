@@ -26,12 +26,12 @@ while True:
     # Display a dialog box for the user to select monster cards to delete
     selected = easygui.multchoicebox(choices=choices)
 
-    if selected is None: # If the user pressed cancel it should exit the loop 
+    if selected is None:  # If the user pressed cancel it should exit the loop
         easygui.msgbox("Canceled")
         break
 
     # If the user didn't select print the message and run the loop again
-    elif selected == []:
+    elif not selected:
         easygui.msgbox("Please select at least one option")
 
     else:
@@ -60,4 +60,3 @@ while True:
         # Display the table in a message box using easygui
         easygui.msgbox(table)
         break  # Exit the loop
-

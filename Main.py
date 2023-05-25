@@ -40,7 +40,7 @@ def f_display_creature():
             row = f"{creature}\t\t{stats['Strength']}\t\t\t" \
                   f"{stats['Speed']}\t\t\t" \
                   f"{stats['Stealth']}\t\t\t" \
-                  f"{stats['Cunning']}"
+                  f"{stats['Cunning']}\t\t\t"
             rows.append(row)
 
         # Join the header and rows together with a newline character '\n'
@@ -105,10 +105,12 @@ def f_add_creature():
                     # Check if any field is left empty
                     check = True
             if check is True:
-                # If any field is empty, continue the loop and ask for input again
+                # If any field is empty,
+                # continue the loop and ask for input again
                 continue
             else:
-                # If the user has entered valid input, add the new monster card to the dictionary
+                # If the user has entered valid input,
+                # add the new monster card to the dictionary
                 creatures[monster_info[0]] = {"Strength": int(monster_info[1]),
                                               "Speed": int(monster_info[2]),
                                               "Stealth": int(monster_info[3]),
@@ -128,29 +130,35 @@ def f_configure_creature():
         # If the creature exists, allow the user to edit its stats
         creature_stats = creatures[searched_monster]
         updated_stats = {}
+
+        # Iterate over each stat of the creature
         for stat in creature_stats:
             while True:
+                # Prompt the user to enter a new value for the current stat
                 new_value = easygui.enterbox(f"Enter new value for {stat} "
                                              f"(current value: '"
-                                             f"'{creature_stats[stat]}): ")
-                try:
+                                             f"{creature_stats[stat]}'): ")
 
+                try:
+                    # Check if a value was entered
                     if new_value is not None and new_value != "":
                         int_new = int(new_value)
                     else:
+                        # If no value was entered, return from the function
                         return
                 except ValueError:
                     # Display an error message if an invalid number is entered
-                    easygui.msgbox("Please enter a valid number"
+                    easygui.msgbox("Please enter a valid integer"
                                    " for the status fields")
                 else:
                     if int_new > 25 or int_new < 1:
-                        # Display an error message
-                        # if the number is not within the valid range
-                        easygui.msgbox("Please enter a"
-                                       " number between 1 and 25")
-
+                        # Display an error message if the number
+                        # is not within the valid range
+                        easygui.msgbox("Please enter a number "
+                                       "between 1 and 25")
                     else:
+                        # Update the stat value in the
+                        # updated_stats dictionary
                         updated_stats[stat] = creature_stats[stat]
                         creatures[searched_monster] = updated_stats
                         break

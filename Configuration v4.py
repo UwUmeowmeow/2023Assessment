@@ -1,7 +1,5 @@
 """Allow user to type in Monster name in the search box; allow user to type in 
 new values for each field and display it with easy,gui """
-
-
 # Import the easygui module for displaying a message box
 import easygui
 
@@ -20,7 +18,8 @@ creatures = {
 }
 
 # Allow user to type in the search box
-searched_monster = easygui.enterbox("Enter the name of the creature you want to edit: ")
+searched_monster = easygui.enterbox(
+    "Enter the name of the creature you want to edit: ")
 
 # Check if the entered creature name exists in the dictionary
 if searched_monster in creatures:
@@ -28,12 +27,32 @@ if searched_monster in creatures:
     creature_stats = creatures[searched_monster]
     updated_stats = {}
     for stat in creature_stats:
-        new_value = easygui.enterbox(f"Enter new value for {stat} (current value: {creature_stats[stat]}): ")
-        if new_value is not None:
-            updated_stats[stat] = int(new_value)
-        else:
-            updated_stats[stat] = creature_stats[stat]
-    creatures[searched_monster] = updated_stats
+        while True:
+            new_value = easygui.enterbox(f"Enter new value for {stat} "
+                                         f"(current value: '"
+                                         f"'{creature_stats[stat]}): ")
+            try:
+
+                if new_value is not None and new_value != "":
+                    int_new = int(new_value)
+                else:
+                    break
+            except ValueError:
+                # Display an error message if an invalid number is entered
+                easygui.msgbox("Please enter a valid number"
+                               " for the status fields")
+            else:
+                if int_new > 25 or int_new < 1:
+                    # Display an error message
+                    # if the number is not within the valid range
+                    easygui.msgbox("Please enter a"
+                                   " number between 1 and 25")
+
+                else:
+                    updated_stats[stat] = creature_stats[stat]
+                    creatures[searched_monster] = updated_stats
+                    break
+
     # Display the updated stats of the creature
     new_msg = ""
     title = f"{searched_monster}\n"

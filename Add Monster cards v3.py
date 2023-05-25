@@ -35,10 +35,9 @@ while True:
 
     # Define a list of fields for the message box
     monster_info = easygui.multenterbox(title=enterbox_title,
-                                    msg="Confirm the card info",
-                                    fields=enterbox_fields,
-                                    values=monster_info)
-
+                                        msg="Confirm the card info",
+                                        fields=enterbox_fields,
+                                        values=monster_info)
 
     check = False
 
@@ -51,23 +50,23 @@ while True:
         try:
             creasture_values = int(enterbox_info)
         except ValueError:
-            easygui.msgbox("Please enter a valid number for the status fields")
+            easygui.msgbox("Please enter a valid integer for the status fields")
             break
         else:
             if creasture_values > 25 or creasture_values < 1:
-                easygui.msgbox("Please enter number between 1 to 25")
+                easygui.msgbox("Please enter integer between 1 to 25")
                 break
 
     else:
         for item in monster_info:
-                if item == "":
-                    check = True
+            if item == "":
+                check = True
         if check is True:
             continue
         else:
             # If the user has entered valid input, add the new monster card to the dictionary
             creatures[monster_info[0]] = {"Strength": int(monster_info[1]), "Speed": int(monster_info[2]),
-                                        "Stealth": int(monster_info[3]), "Cunning": int(monster_info[4])}
+                                          "Stealth": int(monster_info[3]), "Cunning": int(monster_info[4])}
             break
     
 
@@ -92,5 +91,3 @@ print(table)
 
 # Display the table in a message box using easygui
 easygui.msgbox(title=title_add, msg=table)
-
-
