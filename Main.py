@@ -127,10 +127,10 @@ def f_configure_creature():
 
     # Check if the entered creature name exists in the dictionary
     if searched_monster in creatures:
+        unchanged = creatures[searched_monster]
         # If the creature exists, allow the user to edit its stats
         creature_stats = creatures[searched_monster]
         updated_stats = {}
-
         # Iterate over each stat of the creature
         for stat in creature_stats:
             while True:
@@ -141,11 +141,13 @@ def f_configure_creature():
 
                 try:
                     # Check if a value was entered
-                    if new_value is not None and new_value != "":
-                        int_new = int(new_value)
-                    else:
-                        # If no value was entered, return from the function
+                    if new_value is None:
+                        creatures[searched_monster.title()] = unchanged
+                        easygui.msgbox("Data not changed")
                         return
+                    else:
+                        # If no value was entered, break from the loop
+                        int_new = int(new_value)
                 except ValueError:
                     # Display an error message if an invalid number is entered
                     easygui.msgbox("Please enter a valid integer"
@@ -183,7 +185,7 @@ def f_search_creature(searched_monster):
         search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
                       f"Speed: {creatures[searched_monster]['Speed']}\n"
                       f"Stealth: {creatures[searched_monster]['Stealth']}\n"
-                      f"Cunning: {creatures[searched_monster]['Cunning']}")
+                      f"Cunning: {creatures[searched_monster]['Cunning']}\n")
         # Display a message box with the creature's stats
         easygui.msgbox(title=search_title, msg=search_msg)
     else:
