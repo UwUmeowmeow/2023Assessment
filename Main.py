@@ -180,7 +180,7 @@ def f_configure_creature():
 def f_search_creature(searched_monster):
     if searched_monster is None:
         easygui.msgbox("Canceled")
-        return 
+        return
     # Check if the entered creature name exists in the dictionary
     elif searched_monster in creatures:
         # Prepare the title and message to display the creature's stats
@@ -209,8 +209,10 @@ def f_delete_creature():
         for name, stats in creatures.items():
             choices.append(name)
 
+        title = "Deleting creatures"
+        msg = "Pick creature as much as you like to delete"
         # Display a dialog box for the user to select monster cards to delete
-        selected = easygui.multchoicebox(choices=choices)
+        selected = easygui.multchoicebox(title=title, msg=msg, choices=choices)
 
         # If the user pressed cancel, exit the loop
         if selected is None:
