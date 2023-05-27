@@ -161,7 +161,7 @@ def f_configure_creature():
                     else:
                         # Update the stat value in the
                         # updated_stats dictionary
-                        updated_stats[stat] = creature_stats[stat]
+                        updated_stats[stat] = int_new
                         creatures[searched_monster] = updated_stats
                         break
 
