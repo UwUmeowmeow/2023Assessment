@@ -178,8 +178,11 @@ def f_configure_creature():
 
 # Function to search for the creature and display it specific stats
 def f_search_creature(searched_monster):
+    if searched_monster is None:
+        easygui.msgbox("Canceled")
+        return 
     # Check if the entered creature name exists in the dictionary
-    if searched_monster in creatures:
+    elif searched_monster in creatures:
         # Prepare the title and message to display the creature's stats
         search_title = f"Searched Monster: {searched_monster}"
         search_msg = (f"Strength: {creatures[searched_monster]['Strength']}\n"
