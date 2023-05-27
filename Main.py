@@ -223,12 +223,12 @@ def f_delete_creature():
             # Delete the selected monster cards from the dictionary
             for item in selected:
                 del creatures[item]
+                easygui.msgbox(f"{deleted_creature} is deleted")
 
             # Call in the display creature function and
             # display the whole dictionary
             if creatures != {}:
                 f_display_creature()
-
                 return
             else:
                 easygui.msgbox("There is no creature left")
