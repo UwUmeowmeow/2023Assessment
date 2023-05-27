@@ -190,7 +190,7 @@ def f_search_creature(searched_monster):
         easygui.msgbox(title=search_title, msg=search_msg)
     else:
         # Display an error message if the creature is not found
-        easygui.msgbox("Creature not found.")
+        easygui.msgbox(f"{searched_monster} Creature not found.")
 
 
 # Function to delete individual creature or
