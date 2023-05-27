@@ -157,7 +157,7 @@ def f_configure_creature():
                         # Display an error message if the number
                         # is not within the valid range
                         easygui.msgbox("Please enter a number "
-                                       "between 1 and 25")
+                                       "between 1 to 25")
                     else:
                         # Update the stat value in the
                         # updated_stats dictionary
