@@ -235,6 +235,7 @@ def f_delete_creature():
                 easygui.msgbox("No Creature Left")
                 break
 
+                
 # Main routine
 # Looping
 while True:
@@ -271,3 +272,4 @@ while True:
     else:
         easygui.msgbox("You Exit the program")
         exit()
+        
